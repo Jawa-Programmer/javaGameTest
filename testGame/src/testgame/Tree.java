@@ -5,39 +5,53 @@
  */
 package testgame;
 
-import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glColor3f;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glVertex3f;
+import static org.lwjgl.opengl.GL11.*;
 
 /**
  *
  * @author Спок
  */
-public class Tree {
+public class Tree extends GameObject {
 
-    float x = 0, y = 0f, z = 0, width = 0.5f, heigth = 0.5f;
+    protected static final int texN = 2;
 
     public Tree(float x, float y, float z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        super(x, y, z);
+        width = 0.75f;
+        heigth = 1f;
+        depth = 0.75f;
+        x_offset = 0.25f / 2;
+        z_offset = 0.25f / 2;
+        is_Prozrach=true;
     }
 
     public void Draw() {
+/*
+        glBegin(GL_QUADS);
+
+        glColor4f(1, 1, 1,1);
+
+        glTexCoord2f(0, TexHei * (texN + 1));
+        glVertex3f(x + x_offset, y, z + z_offset + depth / 2);
+                glTexCoord2f(texX1, TexHei * (texN + 1));
+        glVertex3f(x + x_offset + width, y, z + z_offset + depth / 2);        
+        glTexCoord2f(texX1, TexHei * (texN));
+        glVertex3f(x + x_offset + width, y+heigth, z + z_offset + depth / 2);        
+        glTexCoord2f(0, TexHei * (texN));
+        glVertex3f(x + x_offset , y+heigth, z + z_offset + depth / 2);
+
+        glEnd();*/
+
         glBegin(GL_TRIANGLES);
 
-        glColor3f(0, 1, 0);
+        glColor4f(1, 1, 1,1);
 
-        glVertex3f(x - width / 2, y, z);
-        glVertex3f(x + width / 2, y, z);
-        glVertex3f(x, y + heigth, z);
-
-        glColor3f(0, 0.9f, 0);
-        glVertex3f(x, y, z + width / 2);
-        glVertex3f(x, y, z - width / 2);
-        glVertex3f(x, y + heigth, z);
+        glTexCoord2f(0, TexHei * (texN + 1));
+        glVertex3f(x + x_offset, y, z + z_offset + depth / 2);
+                glTexCoord2f(texX1, TexHei * (texN + 1));
+        glVertex3f(x + x_offset + width, y, z + z_offset + depth / 2);        
+        glTexCoord2f(texX1/2, TexHei * (texN));
+        glVertex3f(x + x_offset + width/2, y+heigth, z + z_offset + depth / 2);  
 
         glEnd();
     }
